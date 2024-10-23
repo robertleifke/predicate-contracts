@@ -97,6 +97,19 @@ contract RateLimiterTest is Test {
         assertEq(priceOracle.getPrice(newToken, 100), newPrice);
     }
 
+    function testGetPriceWithTokenAlias() public {
+        MockPriceAggregator priceOracle = new MockPriceAggregator();
+        address newToken = address(1);
+        address oldToken = address(2);
+        uint256 newPrice = 420;
+        uint256 oldPrice = 69;
+        priceOracle.setPrice(newToken, newPrice);
+        priceOracle.setPrice(oldToken, oldPrice);
+        priceOracle.addTokenAlias(newToken, oldToken);
+        _setPriceOracle(priceOracle);
+        assertEq(priceOracle.getPrice(newToken, 100), oldPrice);
+    }
+
     function testByPassRateLimit() public {
         assertFalse(_rateLimiter.bypassRateLimit(address(this)));
         _rateLimiter.setRateLimitBypass(address(this));

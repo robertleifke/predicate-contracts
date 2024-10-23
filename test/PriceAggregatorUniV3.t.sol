@@ -132,4 +132,19 @@ contract OwnershipPriceAggregatorUniV3Test is Test {
         ownablePriceAgg.transferOwnership(address(33));
         assertTrue(address(33) == ownablePriceAgg.owner());
     }
+
+    function testTokenAlias() public {
+        address _wbtc = makeAddr("wbtc");
+        address _alias = makeAddr("alias");
+        vm.expectRevert();
+        _priceAggImpl.addTokenAlias(_wbtc, _alias);
+        vm.prank(_owner);
+        _priceAggImpl.addTokenAlias(_wbtc, _alias);
+        assertEq(_alias, _priceAggImpl.getAliasForToken(_wbtc));
+        vm.expectRevert();
+        _priceAggImpl.removeTokenAlias(_wbtc);
+        vm.prank(_owner);
+        _priceAggImpl.removeTokenAlias(_wbtc);
+        assertEq(address(0), _priceAggImpl.getAliasForToken(_wbtc));
+    }
 }

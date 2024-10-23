@@ -5,12 +5,16 @@ import {IPriceAggregator} from "../../src/interfaces/IPriceAggregator.sol";
 
 contract MockPriceAggregator is IPriceAggregator {
     mapping(address => uint256) public prices;
+    mapping(address => address) public tokenAlias;
 
     function setPrice(address token, uint256 price) external {
         prices[token] = price;
     }
 
     function getPrice(address token, uint256 amountIn) external view override returns (uint256) {
+        if (tokenAlias[token] != address(0)) {
+            token = tokenAlias[token];
+        }
         require(prices[token] != 0, "MockPriceAggregator: token not supported");
         require(amountIn > 0, "MockPriceAggregator: amountIn must be greater than 0");
         return prices[token];
@@ -30,5 +34,9 @@ contract MockPriceAggregator is IPriceAggregator {
         address token
     ) external view override returns (bool) {
         return prices[token] != 0;
+    }
+
+    function addTokenAlias(address _token, address _alias) external {
+        tokenAlias[_token] = _alias;
     }
 }

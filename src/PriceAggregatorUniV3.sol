@@ -20,12 +20,29 @@ contract PriceAggregatorUniV3 is IPriceAggregator, Ownable {
     uint256 public defaultTWAPPeriod;
     mapping(address => bool) public isTokenSupported;
     mapping(bytes32 => address) public overriddenPoolForRoute;
+    mapping(address => address) public tokenAlias;
 
     constructor(address _owner, address _weth, address _usdc, uint256 _defaultTWAPPeriod) {
         _transferOwnership(_owner);
         WETH = _weth;
         USDC = _usdc;
         defaultTWAPPeriod = _defaultTWAPPeriod;
+    }
+
+    function addTokenAlias(address _token, address _alias) external onlyOwner {
+        tokenAlias[_token] = _alias;
+    }
+
+    function removeTokenAlias(
+        address _token
+    ) external onlyOwner {
+        tokenAlias[_token] = address(0);
+    }
+
+    function getAliasForToken(
+        address _token
+    ) external view returns (address) {
+        return tokenAlias[_token];
     }
 
     /**
@@ -52,6 +69,8 @@ contract PriceAggregatorUniV3 is IPriceAggregator, Ownable {
 
     /// @inheritdoc IPriceAggregator
     function getPrice(address _token, uint256 _amountIn) public view override returns (uint256) {
+        address _alias = tokenAlias[_token];
+        address _token = _alias != address(0) ? _alias : _token;
         require(isTokenSupported[_token], "Token not supported");
         return assetToAsset(_token, _amountIn, USDC, defaultTWAPPeriod);
     }
