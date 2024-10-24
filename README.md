@@ -1,6 +1,6 @@
 # predicate-contracts
 
-Core contracts that make the predicate avs possible
+Predicate AVS Contracts
 
 This repository depends on some submodules. Please run the following command before testing. 
 ```

@@ -1,0 +1,21 @@
+{
+  "name": "predicate-contracts",
+  "version": "1.0.2",
+  "description": "Core contracts for Predicate AVS",
+  "files": [
+    "src/**/*.sol",
+    "src/*.sol"
+  ],
+  "directories": {
+    "lib": "lib",
+    "tests": "tests",
+    "test": "test",
+    "src": "src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PredicateLabs/predicate-contracts"
+  },
+  "author": "heimdall labs",
+  "license": "MIT"
+}
