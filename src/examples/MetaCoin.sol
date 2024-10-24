@@ -17,7 +17,6 @@ contract MetaCoin is PredicateClient {
     constructor(address owner, address serviceManager) {
         balances[owner] = 10_000_000_000_000;
         setServiceManager(serviceManager);
-        _transferOwnership(owner);
     }
 
     function sendCoin(address receiver, uint256 amount, PredicateMessage calldata predicateMessage) public {

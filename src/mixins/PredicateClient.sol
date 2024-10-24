@@ -27,7 +27,7 @@ contract PredicateClient is IPredicateClient {
      */
     function setPolicy(
         string memory _policyID
-    ) external onlyOwner {
+    ) external {
         policyID = _policyID;
         serviceManager.setPolicy(_policyID);
     }
@@ -38,7 +38,7 @@ contract PredicateClient is IPredicateClient {
      */
     function setServiceManager(
         address _serviceManager
-    ) public onlyOwner {
+    ) public {
         serviceManager = IServiceManager(_serviceManager);
     }
 
