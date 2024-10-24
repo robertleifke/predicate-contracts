@@ -38,7 +38,7 @@ contract MockClient is PredicateClient, Ownable {
      */
     function setPredicateServiceManager(
         address _predicateManager
-    )  public onlyOwner {
+    ) public onlyOwner {
         serviceManager = IPredicateManager(_predicateManager);
     }
 
