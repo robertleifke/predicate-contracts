@@ -8,7 +8,6 @@ import {PredicateClient} from "../mixins/PredicateClient.sol";
 import {PredicateMessage} from "../interfaces/IPredicateClient.sol";
 import {IServiceManager} from "../interfaces/IServiceManager.sol";
 
-
 // This is just a simple example of a coin-like contract.
 // It is not ERC20 compatible and cannot be expected to talk to other
 // coin/token contracts.
