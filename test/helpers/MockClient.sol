@@ -13,7 +13,7 @@ contract MockClient is PredicateClient, Ownable {
     constructor(
         address _serviceManager
     ) {
-        setServiceManager(_serviceManager);
+        setPredicateManager(_serviceManager);
         _transferOwnership(msg.sender);
     }
 
@@ -38,7 +38,7 @@ contract MockClient is PredicateClient, Ownable {
      */
     function setPredicateServiceManager(
         address _predicateManager
-    )  public onlyOwner {
+    ) public onlyOwner {
         serviceManager = IPredicateManager(_predicateManager);
     }
 

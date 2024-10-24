@@ -19,7 +19,7 @@ contract MetaCoin is PredicateClient, Ownable {
 
     constructor(address owner, address serviceManager) {
         balances[owner] = 10_000_000_000_000;
-        setServiceManager(serviceManager);
+        setPredicateManager(serviceManager);
         _transferOwnership(owner);
     }
 
