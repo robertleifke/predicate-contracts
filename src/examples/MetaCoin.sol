@@ -2,14 +2,17 @@
 // Tells the Solidity compiler to compile only from v0.8.13 to v0.9.0
 pragma solidity ^0.8.12;
 
+import {Ownable} from "openzeppelin/access/Ownable.sol";
+
 import {PredicateClient} from "../mixins/PredicateClient.sol";
 import {PredicateMessage} from "../interfaces/IPredicateClient.sol";
+import {IPredicateManager} from "../interfaces/IPredicateManager.sol";
 
 // This is just a simple example of a coin-like contract.
 // It is not ERC20 compatible and cannot be expected to talk to other
 // coin/token contracts.
 
-contract MetaCoin is PredicateClient {
+contract MetaCoin is PredicateClient, Ownable {
     mapping(address => uint256) public balances;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
@@ -26,6 +29,27 @@ contract MetaCoin is PredicateClient {
 
         // business logic function that is protected
         _sendCoin(receiver, amount);
+    }
+
+    /**
+     * @notice Updates the policy ID
+     * @param _policyID policy ID from onchain
+     */
+    function setPolicy(
+        string memory _policyID
+    ) external onlyOwner {
+        policyID = _policyID;
+        serviceManager.setPolicy(_policyID);
+    }
+
+    /**
+     * @notice Function for setting the ServiceManager
+     * @param _serviceManager address of the service manager
+     */
+    function setServiceManager(
+        address _serviceManager
+    ) public onlyOwner {
+        serviceManager = IPredicateManager(_serviceManager);
     }
 
     // business logic function that is protected

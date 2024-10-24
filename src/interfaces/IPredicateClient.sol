@@ -19,4 +19,12 @@ interface IPredicateClient {
     function setPolicy(
         string memory _policyID
     ) external;
+
+    /**
+     * @notice Function for setting the Predicate ServiceManager
+     * @param _serviceManager address of the service manager
+     */
+    function setServiceManager(
+        address _serviceManager
+    ) external;
 }

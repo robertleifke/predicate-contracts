@@ -2,14 +2,13 @@
 
 pragma solidity ^0.8.12;
 
-import {Ownable} from "openzeppelin/access/Ownable.sol";
-import {IServiceManager, Task} from "../interfaces/IServiceManager.sol";
+import {IPredicateManager, Task} from "../interfaces/IPredicateManager.sol";
 import {IPredicateClient, PredicateMessage} from "../interfaces/IPredicateClient.sol";
 
-contract PredicateClient is IPredicateClient, Ownable {
+abstract contract PredicateClient is IPredicateClient {
     error PredicateClient__Unauthorized();
 
-    IServiceManager public serviceManager;
+    IPredicateManager public serviceManager;
     string public policyID;
 
     /**
@@ -20,27 +19,6 @@ contract PredicateClient is IPredicateClient, Ownable {
             revert PredicateClient__Unauthorized();
         }
         _;
-    }
-
-    /**
-     * @notice Updates the policy ID
-     * @param _policyID policy ID from onchain
-     */
-    function setPolicy(
-        string memory _policyID
-    ) external onlyOwner {
-        policyID = _policyID;
-        serviceManager.setPolicy(_policyID);
-    }
-
-    /**
-     * @notice Internal function for setting the ServiceManager
-     * @param _serviceManager address of the service manager
-     */
-    function setServiceManager(
-        address _serviceManager
-    ) public onlyOwner {
-        serviceManager = IServiceManager(_serviceManager);
     }
 
     function _authorizeTransaction(

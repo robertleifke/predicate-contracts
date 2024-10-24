@@ -6,7 +6,7 @@ import {Test, console} from "forge-std/Test.sol";
 import {ISignatureUtils} from "eigenlayer-contracts/src/contracts/interfaces/IDelegationManager.sol";
 
 import {ServiceManager} from "../src/ServiceManager.sol";
-import {Task} from "../src/interfaces/IServiceManager.sol";
+import {Task} from "../src/interfaces/IPredicateManager.sol";
 import {MockClient} from "./helpers/MockClient.sol";
 import {MockProxy} from "./helpers/MockProxy.sol";
 import {MockProxyAdmin} from "./helpers/MockProxyAdmin.sol";
