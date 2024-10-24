@@ -5,7 +5,7 @@ pragma solidity ^0.8.12;
 import {IServiceManager, Task} from "../interfaces/IServiceManager.sol";
 import {IPredicateClient, PredicateMessage} from "../interfaces/IPredicateClient.sol";
 
-contract PredicateClient is IPredicateClient {
+abstract contract PredicateClient is IPredicateClient {
     error PredicateClient__Unauthorized();
 
     IServiceManager public serviceManager;
@@ -19,27 +19,6 @@ contract PredicateClient is IPredicateClient {
             revert PredicateClient__Unauthorized();
         }
         _;
-    }
-
-    /**
-     * @notice Updates the policy ID
-     * @param _policyID policy ID from onchain
-     */
-    function setPolicy(
-        string memory _policyID
-    ) external {
-        policyID = _policyID;
-        serviceManager.setPolicy(_policyID);
-    }
-
-    /**
-     * @notice Internal function for setting the ServiceManager
-     * @param _serviceManager address of the service manager
-     */
-    function setServiceManager(
-        address _serviceManager
-    ) public {
-        serviceManager = IServiceManager(_serviceManager);
     }
 
     function _authorizeTransaction(
