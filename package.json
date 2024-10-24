@@ -17,5 +17,9 @@
     "url": "git+https://github.com/PredicateLabs/predicate-contracts"
   },
   "author": "heimdall labs",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-foundry": "^1.1.2",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
+  }
 }
