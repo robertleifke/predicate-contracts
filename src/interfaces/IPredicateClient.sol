@@ -24,7 +24,7 @@ interface IPredicateClient {
      * @notice Function for setting the Predicate ServiceManager
      * @param _predicateManager address of the service manager
      */
-    function setPredicateServiceManager(
+    function setPredicateManager(
         address _predicateManager
     ) external;
 }

@@ -13,7 +13,7 @@ contract MockClient is PredicateClient, Ownable {
     constructor(
         address _serviceManager
     ) {
-        setServiceManager(_serviceManager);
+        setPredicateManager(_serviceManager);
         _transferOwnership(msg.sender);
     }
 
