@@ -34,12 +34,12 @@ contract MockClient is PredicateClient, Ownable {
 
     /**
      * @notice Internal function for setting the ServiceManager
-     * @param _serviceManager address of the service manager
+     * @param _predicateManager address of the service manager
      */
-    function setServiceManager(
-        address _serviceManager
-    ) public onlyOwner {
-        serviceManager = IPredicateManager(_serviceManager);
+    function setPredicateServiceManager(
+        address _predicateManager
+    )  public onlyOwner {
+        serviceManager = IPredicateManager(_predicateManager);
     }
 
     fallback() external payable {
