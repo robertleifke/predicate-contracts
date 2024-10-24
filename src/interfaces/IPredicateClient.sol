@@ -22,9 +22,9 @@ interface IPredicateClient {
 
     /**
      * @notice Function for setting the Predicate ServiceManager
-     * @param _serviceManager address of the service manager
+     * @param _predicateManager address of the service manager
      */
-    function setServiceManager(
-        address _serviceManager
+    function setPredicateServiceManager(
+        address _predicateManager
     ) external;
 }
