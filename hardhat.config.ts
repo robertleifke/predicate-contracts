@@ -1,5 +1,5 @@
-import 'hardhat-preprocessor';
-const fs = require("fs");
+import "hardhat-preprocessor";
+import fs from "fs";
 
 function getRemappings() {
   return fs
@@ -13,8 +13,8 @@ function getRemappings() {
 module.exports = {
   solidity: "0.8.12",
   preprocess: {
-    eachLine: (hre) => ({
-      transform: (line) => {
+    eachLine: (hre: string) => ({
+      transform: (line: string) => {
         if (line.match(/^\s*import /i)) {
           for (const [from, to] of getRemappings()) {
             if (line.includes(from)) {
@@ -28,7 +28,7 @@ module.exports = {
     }),
   },
   paths: {
-    sources: "./src/contracts",
+    sources: "./src/",
     cache: "./cache_hardhat",
   }
 };

@@ -2,11 +2,10 @@
 
 pragma solidity ^0.8.12;
 
-import {Ownable} from "openzeppelin/access/Ownable.sol";
 import {IServiceManager, Task} from "../interfaces/IServiceManager.sol";
 import {IPredicateClient, PredicateMessage} from "../interfaces/IPredicateClient.sol";
 
-contract PredicateClient is IPredicateClient, Ownable {
+contract PredicateClient is IPredicateClient {
     error PredicateClient__Unauthorized();
 
     IServiceManager public serviceManager;
