@@ -10,9 +10,9 @@ import {IStrategy} from "eigenlayer-contracts/src/contracts/interfaces/IStrategy
 import {ECDSA} from "openzeppelin/utils/cryptography/ECDSA.sol";
 
 import {IStakeRegistry} from "./interfaces/IStakeRegistry.sol";
-import {IServiceManager, Task} from "./interfaces/IServiceManager.sol";
+import {IPredicateManager, Task} from "./interfaces/IPredicateManager.sol";
 
-contract ServiceManager is IServiceManager, OwnableUpgradeable {
+contract ServiceManager is IPredicateManager, OwnableUpgradeable {
     error ServiceManager__Unauthorized();
     error ServiceManager__InvalidOperator();
     error ServiceManager__InvalidStrategy();

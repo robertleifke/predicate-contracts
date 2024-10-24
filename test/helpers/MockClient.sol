@@ -3,7 +3,7 @@
 pragma solidity =0.8.12;
 
 import {PredicateClient} from "../../src/mixins/PredicateClient.sol";
-import {IServiceManager} from "../../src/interfaces/IServiceManager.sol";
+import {IPredicateManager} from "../../src/interfaces/IPredicateManager.sol";
 import {Ownable} from "openzeppelin/access/Ownable.sol";
 import "forge-std/console.sol";
 
@@ -39,7 +39,7 @@ contract MockClient is PredicateClient, Ownable {
     function setServiceManager(
         address _serviceManager
     ) public onlyOwner {
-        serviceManager = IServiceManager(_serviceManager);
+        serviceManager = IPredicateManager(_serviceManager);
     }
 
     fallback() external payable {

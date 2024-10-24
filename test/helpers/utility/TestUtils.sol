@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity =0.8.12;
 
-import {Task} from "../../../src/interfaces/IServiceManager.sol";
+import {Task} from "../../../src/interfaces/IPredicateManager.sol";
 
 library TestUtils {
     function bytes32ToString(

@@ -6,7 +6,7 @@ import {Ownable} from "openzeppelin/access/Ownable.sol";
 
 import {PredicateClient} from "../mixins/PredicateClient.sol";
 import {PredicateMessage} from "../interfaces/IPredicateClient.sol";
-import {IServiceManager} from "../interfaces/IServiceManager.sol";
+import {IPredicateManager} from "../interfaces/IPredicateManager.sol";
 
 // This is just a simple example of a coin-like contract.
 // It is not ERC20 compatible and cannot be expected to talk to other
@@ -49,7 +49,7 @@ contract MetaCoin is PredicateClient, Ownable {
     function setServiceManager(
         address _serviceManager
     ) public onlyOwner {
-        serviceManager = IServiceManager(_serviceManager);
+        serviceManager = IPredicateManager(_serviceManager);
     }
 
     // business logic function that is protected

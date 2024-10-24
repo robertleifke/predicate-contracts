@@ -2,13 +2,13 @@
 
 pragma solidity ^0.8.12;
 
-import {IServiceManager, Task} from "../interfaces/IServiceManager.sol";
+import {IPredicateManager, Task} from "../interfaces/IPredicateManager.sol";
 import {IPredicateClient, PredicateMessage} from "../interfaces/IPredicateClient.sol";
 
 abstract contract PredicateClient is IPredicateClient {
     error PredicateClient__Unauthorized();
 
-    IServiceManager public serviceManager;
+    IPredicateManager public serviceManager;
     string public policyID;
 
     /**
