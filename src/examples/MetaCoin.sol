@@ -42,7 +42,7 @@ contract MetaCoin is PredicateClient, Ownable {
     }
 
     /**
-     * @notice Internal function for setting the ServiceManager
+     * @notice Function for setting the ServiceManager
      * @param _serviceManager address of the service manager
      */
     function setServiceManager(
