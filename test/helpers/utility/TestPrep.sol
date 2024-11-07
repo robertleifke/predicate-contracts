@@ -2,6 +2,7 @@
 pragma solidity =0.8.12;
 
 import {Test, console} from "forge-std/Test.sol";
+import {SignatureWithSaltAndExpiry} from "../../../src/interfaces/IPredicateManager.sol";
 import "./TestStorage.sol";
 
 contract TestPrep is TestStorage {
@@ -22,7 +23,7 @@ contract TestPrep is TestStorage {
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(operatorOnePk, messageHash);
         bytes memory signature = abi.encodePacked(r, s, v);
 
-        operatorSignature = ISignatureUtils.SignatureWithSaltAndExpiry({
+        SignatureWithSaltAndExpiry memory operatorSignature = SignatureWithSaltAndExpiry({
             signature: signature,
             salt: keccak256("abc"),
             expiry: 10_000_000_000_000
@@ -50,7 +51,7 @@ contract TestPrep is TestStorage {
         (v, r, s) = vm.sign(operatorTwoPk, messageHashTwo);
         signature = abi.encodePacked(r, s, v);
 
-        operatorTwoSignature = ISignatureUtils.SignatureWithSaltAndExpiry({
+        SignatureWithSaltAndExpiry memory  operatorTwoSignature = SignatureWithSaltAndExpiry({
             signature: signature,
             salt: keccak256("abc"),
             expiry: 10_000_000_000_000

@@ -42,8 +42,6 @@ contract TestStorage is Test {
     MockEigenPodManager eigenPodManager;
     Ownable ownableClientInterface;
     Ownable ownableServiceManagerInterface;
-    ISignatureUtils.SignatureWithSaltAndExpiry operatorSignature;
-    ISignatureUtils.SignatureWithSaltAndExpiry operatorTwoSignature;
 
     //Addresses
 

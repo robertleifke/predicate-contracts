@@ -2,17 +2,34 @@
 
 pragma solidity ^0.8.12;
 
-import {ISignatureUtils} from "./ISignatureUtils.sol";
-
+// @notice Struct that bundles together a task's parameters for validation
 struct Task {
+    // the unique identifier for the task
     string taskId;
+    // the address of the sender of the task
     address msgSender;
+    // the address of the target contract for the task
     address target;
+    // the value to send with the task
     uint256 value;
+    // the encoded signature and arguments for the task
     bytes encodedSigAndArgs;
+    // the policy ID associated with the task
     string policyID;
+    // the number of signatures required to authorize the task
     uint32 quorumThresholdCount;
+    // the block number by which the task must be executed
     uint256 expireByBlockNumber;
+}
+
+// @notice Struct that bundles together a signature, a salt for uniqueness, and an expiration time for the signature. Used primarily for stack management.
+struct SignatureWithSaltAndExpiry {
+    // the signature itself, formatted as a single bytes object
+    bytes signature;
+    // the salt used to generate the signature
+    bytes32 salt;
+    // the expiration timestamp (UTC) of the signature
+    uint256 expiry;
 }
 
 /**
@@ -35,7 +52,7 @@ interface IPredicateManager {
      */
     function registerOperatorToAVS(
         address operatorSigningKey,
-        ISignatureUtils.SignatureWithSaltAndExpiry memory operatorSignature
+        SignatureWithSaltAndExpiry memory operatorSignature
     ) external;
 
     /**

@@ -10,7 +10,7 @@ import {IStrategy} from "eigenlayer-contracts/src/contracts/interfaces/IStrategy
 import {ECDSA} from "openzeppelin/utils/cryptography/ECDSA.sol";
 
 import {IStakeRegistry} from "./interfaces/IStakeRegistry.sol";
-import {IPredicateManager, Task} from "./interfaces/IPredicateManager.sol";
+import {IPredicateManager, Task, SignatureWithSaltAndExpiry} from "./interfaces/IPredicateManager.sol";
 
 contract ServiceManager is IPredicateManager, OwnableUpgradeable {
     error ServiceManager__Unauthorized();
@@ -232,7 +232,7 @@ contract ServiceManager is IPredicateManager, OwnableUpgradeable {
      */
     function registerOperatorToAVS(
         address _operatorSigningKey,
-        ISignatureUtils.SignatureWithSaltAndExpiry memory _operatorSignature
+        SignatureWithSaltAndExpiry memory _operatorSignature
     ) external onlyPermissionedOperator {
         require(
             signingKeyToOperator[_operatorSigningKey] == address(0),
@@ -249,7 +249,13 @@ contract ServiceManager is IPredicateManager, OwnableUpgradeable {
         if (totalStake >= thresholdStake) {
             operators[msg.sender] = OperatorInfo(totalStake, OperatorStatus.REGISTERED);
             signingKeyToOperator[_operatorSigningKey] = msg.sender;
-            IAVSDirectory(avsDirectory).registerOperatorToAVS(msg.sender, _operatorSignature);
+            ISignatureUtils.SignatureWithSaltAndExpiry memory _operatorSig =
+                ISignatureUtils.SignatureWithSaltAndExpiry(
+                    _operatorSignature.signature,
+                    _operatorSignature.salt,
+                    _operatorSignature.expiry
+                );
+            IAVSDirectory(avsDirectory).registerOperatorToAVS(msg.sender, _operatorSig);
             emit OperatorRegistered(msg.sender);
         }
     }
