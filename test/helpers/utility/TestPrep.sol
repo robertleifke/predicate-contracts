@@ -23,7 +23,7 @@ contract TestPrep is TestStorage {
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(operatorOnePk, messageHash);
         bytes memory signature = abi.encodePacked(r, s, v);
 
-        SignatureWithSaltAndExpiry memory operatorSignature = SignatureWithSaltAndExpiry({
+        operatorSignature = SignatureWithSaltAndExpiry({
             signature: signature,
             salt: keccak256("abc"),
             expiry: 10_000_000_000_000
@@ -51,7 +51,7 @@ contract TestPrep is TestStorage {
         (v, r, s) = vm.sign(operatorTwoPk, messageHashTwo);
         signature = abi.encodePacked(r, s, v);
 
-        SignatureWithSaltAndExpiry memory  operatorTwoSignature = SignatureWithSaltAndExpiry({
+        operatorTwoSignature = SignatureWithSaltAndExpiry({
             signature: signature,
             salt: keccak256("abc"),
             expiry: 10_000_000_000_000
