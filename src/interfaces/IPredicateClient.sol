@@ -2,13 +2,19 @@
 
 pragma solidity ^0.8.12;
 
+// @notice Struct that bundles together a task's parameters for validation
 struct PredicateMessage {
+    // the unique identifier for the task
     string taskId;
+    // the expiration block number for the task
     uint256 expireByBlockNumber;
+    // the operators that have signed the task
     address[] signerAddresses;
+    // the signatures of the operators that have signed the task
     bytes[] signatures;
 }
 
+// @notice Interface for a PredicateClient-type contract that enables clients to define execution rules or parameters for tasks they submit
 interface IPredicateClient {
     /**
      * @notice Sets a policy for the calling address, associating it with a policy document stored on IPFS.

@@ -3,9 +3,9 @@ pragma solidity =0.8.12;
 
 import {Test, console} from "forge-std/Test.sol";
 import {Ownable} from "openzeppelin/access/Ownable.sol";
-import {ISignatureUtils} from "eigenlayer-contracts/src/contracts/interfaces/IDelegationManager.sol";
 
 import {ServiceManager} from "../../../src/ServiceManager.sol";
+import {SignatureWithSaltAndExpiry} from "../../../src/interfaces/IPredicateManager.sol";
 import {PredicateClient} from "../../../src/mixins/PredicateClient.sol";
 import {MockClient} from "./../../helpers/MockClient.sol";
 import {MockProxy} from "./../../helpers/MockProxy.sol";
@@ -42,8 +42,6 @@ contract TestStorage is Test {
     MockEigenPodManager eigenPodManager;
     Ownable ownableClientInterface;
     Ownable ownableServiceManagerInterface;
-    ISignatureUtils.SignatureWithSaltAndExpiry operatorSignature;
-    ISignatureUtils.SignatureWithSaltAndExpiry operatorTwoSignature;
 
     //Addresses
 
@@ -66,7 +64,6 @@ contract TestStorage is Test {
     address testReceiver;
 
     //Integers
-
     uint256 operatorOnePk;
     uint256 operatorOneAliasPk;
     uint256 operatorTwoPk;
@@ -75,6 +72,11 @@ contract TestStorage is Test {
     uint256 testReceiverPk;
 
     //Strings
-
     string policyID = "test-policy";
+
+    //Signatures
+    SignatureWithSaltAndExpiry operatorSignature;
+    SignatureWithSaltAndExpiry operatorTwoSignature;
+
+
 }
